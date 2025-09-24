@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Mi Muñequita</title>
+<style>
+body {
+  margin:0;
+  overflow:hidden;
+  background: linear-gradient(180deg,#000,#330000);
+  color:#fff;
+  font-family:'Georgia', serif;
+  text-align:center;
+  padding: 0 20px;
+}
+h1 {
+  margin-top:20px;
+  font-size:3em;
+  color:pink;
+  text-shadow:0 0 20px red,0 0 40px hotpink;
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow {
+  from { text-shadow:0 0 10px red,0 0 20px pink; }
+  to { text-shadow:0 0 30px hotpink,0 0 60px red; }
+}
+.falling {
+  position:absolute;
+  top:-50px;
+  font-size:2em;
+  animation:fall linear infinite;
+  user-select:none;
+  pointer-events:none;
+}
+@keyframes fall { to { transform:translateY(110vh); opacity:0; } }
+p.carta {
+  margin-top: 40px;
+  text-align:left;
+  font-size:1.2em;
+  line-height:1.6em;
+  max-width:800px;
+  margin-left:auto;
+  margin-right:auto;
+  color:#ffd1dc;
+  text-shadow: 0 0 5px #ff69b4;
+  white-space: pre-wrap;
+}
+</style>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=TU_ID"></script>
+<script>
+window.dataLayer = window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-X4CXYHR6QV');
+</script>
+</head>
+<body>
+
+<h1>🌹 Para mi Muñequita 🌹<br>Con todo mi amor 💖</h1>
+
+<!-- Carta romántica -->
+<p class="carta" id="carta"></p>
+
+<!-- Música de fondo -->
+<audio id="bg-audio" loop muted>
+<source src="musica1.mp3" type="audio/mpeg">
+Tu navegador no soporta audio.
+</audio>
+
+<script>
+// Carta completa
+const textoCarta = `Mi vida,
+Hoy te escribo con el corazon en mis manos, porque la distancia me duele como un fuego que no se apaga. Te extrano con cada fibra de mi ser, y sin ti, el mundo se siente frio, silencioso y vacio. Pero aunque la tristeza me envuelva, cada pensamiento tuyo me quema de amor y deseo, y me recuerda que te llevo dentro de mi, en la piel, en el alma, en cada latido.
+
+Eres mi locura y mi calma, mi delirio y mi refugio. Cada vez que pienso en ti, mi cuerpo se enciende como si tus manos estuvieran recorriendome, como si tus labios me rozaran en un suspiro que dura toda la eternidad. AI mi vida tus besos... TUS BENDITOS BESOS CUANTO LOS NECESITO... Tus besos son relampagos que iluminan mis noches mas oscuras, y tu voz maravillosa es un hechizo que resuena en mi pecho, imposible de olvidar.
+
+Te sueno cada noche, envueltos en la magia de la madrugada, cuando el mundo duerme y solo existimos tu y yo. En esos suenos siento tu calor y olor riquisimo de munequita preciosa juntarse con mi olor, tu respiracion que acompana la mia, tus manos que me buscan, y me duele despertar y descubrir que solo era un susurro de mi imaginacion. Pero aun asi, me aferro a tu amor a esa maravillosa forma que tienes de ser de esa esencia genuina que me conquisto para la eternidad, porque sin ti, mi vida no tiene musica, ni luz, ni aire.
+
+Eres mi tormenta y mi paz, mi abismo y mi cielo, mi estrella mas brillante de mi cielo AI mi vida CUANTO TE NECESITO.... Me llevas al paraiso con una sola mirada, y me arrojas al infierno de tu ausencia cuando no estas. Pero incluso en esa tristeza, prefiero mil veces sentir este fuego que arde por ti que vivir en la tibieza de un mundo donde tu no existas.
+
+Con todo mi amor, mi pasion y mi magia,
+Tu munequito de trapo que nunca deja de pensarte.`;
+
+// Efecto de escritura letra por letra
+let i = 0;
+function escribirCarta() {
+  if (i < textoCarta.length) {
+    document.getElementById('carta').innerHTML += textoCarta.charAt(i);
+    i++;
+    setTimeout(escribirCarta, 30); // velocidad de escritura
+  }
+}
+window.onload = escribirCarta;
+
+// Crear pétalos y corazones cayendo
+function crearElemento() {
+  const simbolos = ["🌹","❤️","💖","💕"];
+  const el = document.createElement("div");
+  el.innerHTML = simbolos[Math.floor(Math.random()*simbolos.length)];
+  el.className = "falling";
+  el.style.left = Math.random()*window.innerWidth+"px";
+  el.style.fontSize=(20+Math.random()*30)+"px";
+  el.style.animationDuration=(4+Math.random()*6)+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),10000);
+}
+setInterval(crearElemento,400);
+
+// Activar música al primer clic o toque
+const audio=document.getElementById('bg-audio');
+function activarSonido(){
+  audio.muted=false;
+  audio.play().catch(()=>{});
+  document.removeEventListener('click',activarSonido);
+  document.removeEventListener('touchstart',activarSonido);
+}
+document.addEventListener('click',activarSonido);
+document.addEventListener('touchstart',activarSonido);
+</script>
+
+</body>
+</html>
